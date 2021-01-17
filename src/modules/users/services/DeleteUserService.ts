@@ -9,7 +9,7 @@ class DeleteUserService {
         const userRepository = getCustomRepository(UsersRepository);
         const user = await userRepository.findOne(id);
 
-        if(!user) {
+        if (!user) {
             throw new AppError('User not found.');
         }
 
@@ -18,8 +18,9 @@ class DeleteUserService {
         return {
             statusCode: 204,
             status: 'success',
-            message: 'User deleted successfully'
+            message: 'User deleted successfully.'
         }
     }
 }
+
 export default DeleteUserService;

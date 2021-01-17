@@ -5,6 +5,7 @@ import ShowUserService from "../services/ShowUserService";
 import {classToPlain} from "class-transformer";
 import UpdateUserService from "../services/UpdateUserService";
 import DeleteUserService from "../services/DeleteUserService";
+import UpdateUserPasswordService from "../services/UpdateUserPasswordService";
 
 class UsersController {
 
@@ -60,6 +61,20 @@ class UsersController {
 
         const deleteUser = new DeleteUserService();
         const user = await deleteUser.execute(parseInt(id));
+
+        return response.json(user);
+    }
+
+    public async updateUserPassword(request: Request, response: Response): Promise<Response> {
+
+        const {id, currentPassword, newPassword} = request.body;
+        const updateUserPassword = new UpdateUserPasswordService();
+
+        const user = await updateUserPassword.execute({
+            id,
+            currentPassword,
+            newPassword
+        });
 
         return response.json(user);
     }
