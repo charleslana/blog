@@ -6,6 +6,8 @@ import {classToPlain} from "class-transformer";
 import UpdateUserService from "../services/UpdateUserService";
 import DeleteUserService from "../services/DeleteUserService";
 import UpdateUserPasswordService from "../services/UpdateUserPasswordService";
+import UpdateUserAvatarService from "../services/UpdateUserAvatarService";
+import AppError from "../../../shared/errors/AppError";
 
 class UsersController {
 
@@ -43,11 +45,11 @@ class UsersController {
 
     public async updateUser(request: Request, response: Response): Promise<Response> {
 
-        const {id, name, email} = request.body;
+        const {name, email} = request.body;
         const updateUser = new UpdateUserService();
 
         const user = await updateUser.execute({
-            id,
+            id: request.user.id,
             name,
             email
         });
@@ -67,16 +69,32 @@ class UsersController {
 
     public async updateUserPassword(request: Request, response: Response): Promise<Response> {
 
-        const {id, currentPassword, newPassword} = request.body;
+        const {currentPassword, newPassword} = request.body;
         const updateUserPassword = new UpdateUserPasswordService();
 
         const user = await updateUserPassword.execute({
-            id,
+            id: request.user.id,
             currentPassword,
             newPassword
         });
 
         return response.json(user);
+    }
+
+    public async updateUserAvatar(request: Request, response: Response): Promise<Response> {
+
+        if (!request.file) {
+            throw new AppError('Invalid field, required avatar.');
+        }
+
+        const updateAvatar = new UpdateUserAvatarService();
+
+        const user = await updateAvatar.execute({
+            id: request.user.id,
+            avatarFilename: request.file.filename
+        });
+
+        return response.json(classToPlain(user));
     }
 
 }

@@ -1,13 +1,18 @@
 import {Router} from 'express';
 import {celebrate, Joi, Segments} from 'celebrate';
 import UsersController from "../controllers/UsersController";
+import authenticatedUser from "../../../shared/http/middlewares/authenticatedUser";
+import uploadConfig from '../../../config/upload';
+import multer from "multer";
 
 const usersRouter = Router();
 const usersController = new UsersController();
 
-usersRouter.get('/', usersController.listUsers);
+const upload = multer(uploadConfig);
 
-usersRouter.get('/:id', celebrate({
+usersRouter.get('/', authenticatedUser, usersController.listUsers);
+
+usersRouter.get('/:id', authenticatedUser, celebrate({
     [Segments.PARAMS]: {
         id: Joi.number().required()
     }
@@ -19,25 +24,23 @@ usersRouter.post('/', celebrate({
         email: Joi.string().email().trim().max(50).required(),
         password: Joi.string().min(6).max(50).required()
     }
-},{abortEarly: false}), usersController.createUser);
+}, {abortEarly: false}), usersController.createUser);
 
-usersRouter.put('/', celebrate({
+usersRouter.put('/', authenticatedUser, celebrate({
     [Segments.BODY]: {
-        id: Joi.number().required(),
         name: Joi.string().pattern(new RegExp('^[a-zA-Z0-9 _]*$')).trim().min(3).max(50).required(),
         email: Joi.string().email().trim().max(50).required()
     }
-},{abortEarly: false}), usersController.updateUser);
+}, {abortEarly: false}), usersController.updateUser);
 
-usersRouter.delete('/:id', celebrate({
+usersRouter.delete('/:id', authenticatedUser, celebrate({
     [Segments.PARAMS]: {
         id: Joi.number().required()
     }
 }), usersController.deleteUser);
 
-usersRouter.put('/password', celebrate({
+usersRouter.put('/password', authenticatedUser, celebrate({
     [Segments.BODY]: {
-        id: Joi.number().required(),
         currentPassword: Joi.string().min(6).max(50).required(),
         newPassword: Joi.string().min(6).max(50).required(),
         passwordConfirmation: Joi.string().valid(Joi.ref('newPassword')).when('newPassword', {
@@ -45,6 +48,13 @@ usersRouter.put('/password', celebrate({
             then: Joi.required()
         })
     }
-},{abortEarly: false}), usersController.updateUserPassword);
+}, {abortEarly: false}), usersController.updateUserPassword);
+
+usersRouter.patch(
+    '/avatar',
+    authenticatedUser,
+    upload.single('avatar'),
+    usersController.updateUserAvatar
+);
 
 export default usersRouter;
