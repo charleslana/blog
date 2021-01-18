@@ -11,11 +11,11 @@ class CreateUserService {
 
         const userRepository = getCustomRepository(UsersRepository);
         const emailExists = await userRepository.findByEmail(email);
-        if(emailExists) {
+        if (emailExists) {
             throw new AppError('Email address already used.')
         }
 
-        const hashedPassword = await hash(password,10);
+        const hashedPassword = await hash(password, 10);
 
         const user = userRepository.create({
             name,

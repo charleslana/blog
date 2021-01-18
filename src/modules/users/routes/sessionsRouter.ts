@@ -10,7 +10,7 @@ sessionsRouter.post('/', celebrate({
         email: Joi.string().email().trim().max(50).required(),
         password: Joi.string().min(6).max(50).required()
     }
-}, {abortEarly: false}), sessionsController.createSession);
+}, {abortEarly: false}), sessionsController.create);
 
 export default sessionsRouter;
 

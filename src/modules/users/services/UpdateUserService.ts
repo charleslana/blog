@@ -11,13 +11,13 @@ class UpdateUserService {
         const userRepository = getCustomRepository(UsersRepository);
         const user = await userRepository.findOne(id);
 
-        if(!user) {
+        if (!user) {
             throw new AppError('User not found.');
         }
 
         const emailExists = await userRepository.findByEmail(email);
 
-        if(emailExists && email != user.email) {
+        if (emailExists && email != user.email) {
             throw new AppError('There is already one email with this name.');
         }
 
@@ -30,4 +30,5 @@ class UpdateUserService {
 
     }
 }
+
 export default UpdateUserService;

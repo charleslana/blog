@@ -11,7 +11,7 @@ class ShowUserService {
 
         const user = await userRepository.findOne(id);
 
-        if(!user) {
+        if (!user) {
             throw new AppError('User not found.');
         }
 
