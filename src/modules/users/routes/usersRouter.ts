@@ -7,7 +7,6 @@ import multer from "multer";
 
 const usersRouter = Router();
 const usersController = new UsersController();
-
 const upload = multer(uploadConfig);
 
 usersRouter.get('/', authenticatedUser, usersController.listUsers);
