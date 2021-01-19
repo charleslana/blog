@@ -1,5 +1,6 @@
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import {Exclude, Expose} from "class-transformer";
+import UsersEnum from "./enumerates/UsersEnum";
 
 @Entity('users')
 class User {
@@ -20,6 +21,13 @@ class User {
     @Exclude({toPlainOnly: true})
     @Column({nullable: true})
     avatar: string;
+
+    @Column({
+        type: "enum",
+        enum: UsersEnum,
+        default: UsersEnum.USER
+    })
+    role: UsersEnum;
 
     @CreateDateColumn()
     created_at: Date;

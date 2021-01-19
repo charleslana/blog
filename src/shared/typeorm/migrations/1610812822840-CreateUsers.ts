@@ -27,14 +27,19 @@ export class CreateUsers1610812822840 implements MigrationInterface {
                     type: 'varchar'
                 },
                 {
-                    name: 'created_at',
-                    type: 'timestamp',
-                    default: 'now()'
-                },
-                {
                     name: 'avatar',
                     type: 'varchar',
                     isNullable: true
+                },
+                {
+                    name: 'role',
+                    type: 'enum',
+                    enum: ['USER', 'MOD', 'ADMIN']
+                },
+                {
+                    name: 'created_at',
+                    type: 'timestamp',
+                    default: 'now()'
                 },
                 {
                     name: 'updated_at',
