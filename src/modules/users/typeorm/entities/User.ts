@@ -1,6 +1,6 @@
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import {Exclude, Expose} from "class-transformer";
-import UsersEnum from "./enumerates/UsersEnum";
+import UsersRoleEnum from "../../enumerates/UsersRoleEnum";
 
 @Entity('users')
 class User {
@@ -24,10 +24,10 @@ class User {
 
     @Column({
         type: "enum",
-        enum: UsersEnum,
-        default: UsersEnum.USER
+        enum: UsersRoleEnum,
+        default: UsersRoleEnum.USER
     })
-    role: UsersEnum;
+    role: UsersRoleEnum;
 
     @CreateDateColumn()
     created_at: Date;

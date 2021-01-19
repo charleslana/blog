@@ -1,6 +1,6 @@
-import UsersEnum from "../typeorm/entities/enumerates/UsersEnum";
+import UsersRoleEnum from "../enumerates/UsersRoleEnum";
 
 export default interface UpdateUserRoleInterface {
     id: number;
-    role: UsersEnum
+    role: UsersRoleEnum
 }

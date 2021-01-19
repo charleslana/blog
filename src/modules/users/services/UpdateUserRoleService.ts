@@ -3,13 +3,13 @@ import {getCustomRepository} from "typeorm";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import AppError from "../../../shared/errors/AppError";
 import UpdateUserRoleInterface from "../interfaces/UpdateUserRoleInterface";
-import UsersEnum from "../typeorm/entities/enumerates/UsersEnum";
+import UsersRoleEnum from "../enumerates/UsersRoleEnum";
 
 class UpdateUserRoleService {
 
     public async execute({id, role}: UpdateUserRoleInterface): Promise<User> {
 
-        if (!(role in UsersEnum)) {
+        if (!(role in UsersRoleEnum)) {
             throw new AppError('Role not found.');
         }
 
