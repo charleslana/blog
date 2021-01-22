@@ -1,6 +1,7 @@
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import {Exclude, Expose} from "class-transformer";
 import UsersRoleEnum from "../../enumerates/UsersRoleEnum";
+import UsersBannedEnum from "../../enumerates/UsersBannedEnum";
 
 @Entity('users')
 class User {
@@ -28,6 +29,13 @@ class User {
         default: UsersRoleEnum.USER
     })
     role: UsersRoleEnum;
+
+    @Column({
+        type: "enum",
+        enum: UsersBannedEnum,
+        default: UsersBannedEnum.NO
+    })
+    banned: UsersBannedEnum;
 
     @CreateDateColumn()
     created_at: Date;

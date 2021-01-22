@@ -7,8 +7,7 @@ export class AddUserIdToPosts1611176036855 implements MigrationInterface {
             'posts',
             new TableColumn({
                 name: 'user_id',
-                type: 'int',
-                isNullable: true
+                type: 'int'
             })
         );
 
@@ -19,7 +18,7 @@ export class AddUserIdToPosts1611176036855 implements MigrationInterface {
                 columnNames: ['user_id'],
                 referencedTableName: 'users',
                 referencedColumnNames: ['id'],
-                onDelete: 'SET NULL'
+                onDelete: 'CASCADE'
             })
         );
     }

@@ -37,6 +37,11 @@ export class CreateUsers1610812822840 implements MigrationInterface {
                     enum: ['USER', 'MOD', 'ADMIN']
                 },
                 {
+                    name: 'banned',
+                    type: 'enum',
+                    enum: ['YES', 'NO']
+                },
+                {
                     name: 'created_at',
                     type: 'timestamp',
                     default: 'now()'

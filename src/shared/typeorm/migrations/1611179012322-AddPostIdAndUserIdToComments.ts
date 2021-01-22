@@ -7,8 +7,7 @@ export class AddPostIdAndUserIdToComments1611179012322 implements MigrationInter
             'comments',
             new TableColumn({
                 name: 'post_id',
-                type: 'int',
-                isNullable: true
+                type: 'int'
             })
         );
 
@@ -16,8 +15,7 @@ export class AddPostIdAndUserIdToComments1611179012322 implements MigrationInter
             'comments',
             new TableColumn({
                 name: 'user_id',
-                type: 'int',
-                isNullable: true
+                type: 'int'
             })
         );
 
@@ -28,7 +26,7 @@ export class AddPostIdAndUserIdToComments1611179012322 implements MigrationInter
                 columnNames: ['post_id'],
                 referencedTableName: 'posts',
                 referencedColumnNames: ['id'],
-                onDelete: 'SET NULL'
+                onDelete: 'CASCADE'
             })
         );
 
@@ -39,7 +37,7 @@ export class AddPostIdAndUserIdToComments1611179012322 implements MigrationInter
                 columnNames: ['user_id'],
                 referencedTableName: 'users',
                 referencedColumnNames: ['id'],
-                onDelete: 'SET NULL'
+                onDelete: 'CASCADE'
             })
         );
     }
