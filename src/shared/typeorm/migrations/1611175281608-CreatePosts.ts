@@ -22,7 +22,7 @@ export class CreatePosts1611175281608 implements MigrationInterface {
                     type: 'text'
                 },
                 {
-                    name: 'blocked',
+                    name: 'visibility',
                     type: 'enum',
                     enum: ['YES', 'NO']
                 },
