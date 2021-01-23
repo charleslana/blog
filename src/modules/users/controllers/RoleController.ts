@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import UpdateUserRoleService from "../services/UpdateUserRoleService";
-import AppSuccessInterface from "../../../shared/success/interfaces/AppSuccessInterface";
+import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInterface";
 
 class RoleController {
 

@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import UpdateUserBannedService from "../services/UpdateUserBannedService";
-import AppSuccessInterface from "../../../shared/success/interfaces/AppSuccessInterface";
+import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInterface";
 
 class BannedController {
 

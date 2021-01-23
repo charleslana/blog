@@ -5,7 +5,7 @@ import ShowUserService from "../services/ShowUserService";
 import {classToPlain} from "class-transformer";
 import UpdateUserService from "../services/UpdateUserService";
 import DeleteUserService from "../services/DeleteUserService";
-import AppSuccessInterface from "../../../shared/success/interfaces/AppSuccessInterface";
+import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInterface";
 
 class UsersController {
 
