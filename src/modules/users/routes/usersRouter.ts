@@ -2,13 +2,15 @@ import {Router} from 'express';
 import {celebrate, Joi, Segments} from 'celebrate';
 import UsersController from "../controllers/UsersController";
 import authenticatedUser from "../../../shared/http/middlewares/authenticatedUser";
+import restrictedAccessForRoleModOrAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleModOrAdmin";
+import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleOnlyAdmin";
 
 const usersRouter = Router();
 const usersController = new UsersController();
 
-usersRouter.get('/', authenticatedUser, usersController.list);
+usersRouter.get('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, usersController.list);
 
-usersRouter.get('/:id', authenticatedUser, celebrate({
+usersRouter.get('/:id', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
     [Segments.PARAMS]: {
         id: Joi.number().required()
     }
@@ -29,7 +31,7 @@ usersRouter.put('/', authenticatedUser, celebrate({
     }
 }, {abortEarly: false}), usersController.update);
 
-usersRouter.delete('/:id', authenticatedUser, celebrate({
+usersRouter.delete('/:id', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
     [Segments.PARAMS]: {
         id: Joi.number().required()
     }
