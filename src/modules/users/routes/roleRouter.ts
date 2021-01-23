@@ -3,11 +3,12 @@ import authenticatedUser from "../../../shared/http/middlewares/authenticatedUse
 import {celebrate, Joi, Segments} from "celebrate";
 import RoleController from "../controllers/RoleController";
 import UsersRoleEnum from "../enumerates/UsersRoleEnum";
+import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleOnlyAdmin";
 
 const roleRouter = Router();
 const roleController = new RoleController();
 
-roleRouter.put('/role', authenticatedUser, celebrate({
+roleRouter.put('/role', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
     [Segments.BODY]: {
         id: Joi.number().required(),
         role: Joi.string().valid(...Object.values(UsersRoleEnum)).required()
