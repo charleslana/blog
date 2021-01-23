@@ -8,7 +8,7 @@ import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/r
 const roleRouter = Router();
 const roleController = new RoleController();
 
-roleRouter.put('/role', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
+roleRouter.put('/', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
     [Segments.BODY]: {
         id: Joi.number().required(),
         role: Joi.string().valid(...Object.values(UsersRoleEnum)).required()

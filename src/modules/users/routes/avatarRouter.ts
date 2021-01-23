@@ -8,11 +8,6 @@ const avatarRouter = Router();
 const avatarController = new AvatarController();
 const upload = multer(uploadConfig);
 
-avatarRouter.patch(
-    '/avatar',
-    authenticatedUser,
-    upload.single('avatar'),
-    avatarController.update
-);
+avatarRouter.patch('/', authenticatedUser, upload.single('avatar'), avatarController.update);
 
 export default avatarRouter;

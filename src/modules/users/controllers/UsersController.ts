@@ -43,11 +43,11 @@ class UsersController {
 
     public async update(request: Request, response: Response): Promise<Response> {
 
-        const {name, email} = request.body;
+        const {id, name, email} = request.body;
         const updateUser = new UpdateUserService();
 
         const user = await updateUser.execute({
-            id: request.user.id,
+            id,
             name,
             email
         });

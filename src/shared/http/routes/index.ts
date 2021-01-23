@@ -5,19 +5,22 @@ import passwordRouter from "../../../modules/users/routes/passwordRouter";
 import avatarRouter from "../../../modules/users/routes/avatarRouter";
 import roleRouter from "../../../modules/users/routes/roleRouter";
 import bannedRouter from "../../../modules/users/routes/bannedRouter";
+import userProfileRouter from "../../../modules/users/routes/userProfileRouter";
 
 const routes = Router();
 
-routes.use('/users', usersRouter);
+routes.use('/users/details', usersRouter);
 
-routes.use('/session', sessionsRouter);
+routes.use('/users/session', sessionsRouter);
 
-routes.use('/users', passwordRouter);
+routes.use('/users/profile', userProfileRouter);
 
-routes.use('/users', avatarRouter);
+routes.use('/users/password', passwordRouter);
 
-routes.use('/users', roleRouter);
+routes.use('/users/avatar', avatarRouter);
 
-routes.use('/users', bannedRouter);
+routes.use('/users/role', roleRouter);
+
+routes.use('/users/banned', bannedRouter);
 
 export default routes;

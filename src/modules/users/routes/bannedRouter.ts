@@ -9,7 +9,7 @@ import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/r
 const bannedRouter = Router();
 const bannedController = new BannedController();
 
-roleRouter.put('/banned', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
+roleRouter.put('/', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
     [Segments.BODY]: {
         id: Joi.number().required(),
         banned: Joi.string().valid(...Object.values(UsersBannedEnum)).required()

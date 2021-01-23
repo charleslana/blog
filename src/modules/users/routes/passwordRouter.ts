@@ -6,7 +6,7 @@ import PasswordController from "../controllers/PasswordController";
 const passwordRouter = Router();
 const passwordController = new PasswordController();
 
-passwordRouter.put('/password', authenticatedUser, celebrate({
+passwordRouter.put('/', authenticatedUser, celebrate({
     [Segments.BODY]: {
         currentPassword: Joi.string().min(6).max(50).required(),
         newPassword: Joi.string().min(6).max(50).required(),

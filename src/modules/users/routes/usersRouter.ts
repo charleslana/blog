@@ -24,8 +24,9 @@ usersRouter.post('/', celebrate({
     }
 }, {abortEarly: false}), usersController.create);
 
-usersRouter.put('/', authenticatedUser, celebrate({
+usersRouter.put('/', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
     [Segments.BODY]: {
+        id: Joi.number().required(),
         name: Joi.string().pattern(new RegExp('^[a-zA-Z0-9 _]*$')).trim().min(3).max(50).required(),
         email: Joi.string().email().trim().max(50).required()
     }
