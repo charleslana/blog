@@ -1,7 +1,7 @@
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import {Exclude, Expose} from "class-transformer";
-import UsersRoleEnum from "../../enumerates/UsersRoleEnum";
-import UsersBannedEnum from "../../enumerates/UsersBannedEnum";
+import UsersRoleEnum from "../../enumerations/UsersRoleEnum";
+import UsersBannedEnum from "../../enumerations/UsersBannedEnum";
 
 @Entity('users')
 class User {

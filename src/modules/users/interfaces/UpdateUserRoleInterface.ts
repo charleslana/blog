@@ -1,4 +1,4 @@
-import UsersRoleEnum from "../enumerates/UsersRoleEnum";
+import UsersRoleEnum from "../enumerations/UsersRoleEnum";
 
 export default interface UpdateUserRoleInterface {
     id: number;

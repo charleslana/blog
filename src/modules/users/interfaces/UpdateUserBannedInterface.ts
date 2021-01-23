@@ -1,4 +1,4 @@
-import UsersBannedEnum from "../enumerates/UsersBannedEnum";
+import UsersBannedEnum from "../enumerations/UsersBannedEnum";
 
 export default interface UpdateUserBannedInterface {
     id: number;

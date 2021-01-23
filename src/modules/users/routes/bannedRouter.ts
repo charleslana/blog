@@ -3,7 +3,7 @@ import authenticatedUser from "../../../shared/http/middlewares/authenticatedUse
 import {celebrate, Joi, Segments} from "celebrate";
 import BannedController from "../controllers/BannedController";
 import roleRouter from "./roleRouter";
-import UsersBannedEnum from "../enumerates/UsersBannedEnum";
+import UsersBannedEnum from "../enumerations/UsersBannedEnum";
 import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleOnlyAdmin";
 
 const bannedRouter = Router();

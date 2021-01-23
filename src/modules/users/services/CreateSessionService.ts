@@ -6,7 +6,7 @@ import {compare} from "bcryptjs";
 import {sign} from "jsonwebtoken";
 import authConfig from '../../../config/auth';
 import AppSuccess from "../../../shared/success/AppSuccess";
-import UsersBannedEnum from "../enumerates/UsersBannedEnum";
+import UsersBannedEnum from "../enumerations/UsersBannedEnum";
 
 class CreateSessionService {
 

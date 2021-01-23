@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from "express";
 import {getCustomRepository} from "typeorm";
 import UsersRepository from "../../../modules/users/typeorm/repositories/UsersRepository";
 import AppError from "../../errors/AppError";
-import UsersRoleEnum from "../../../modules/users/enumerates/UsersRoleEnum";
+import UsersRoleEnum from "../../../modules/users/enumerations/UsersRoleEnum";
 
 export default async function restrictedAccessForRoleModOrAdmin(request: Request, response: Response, next: NextFunction)
     : Promise<void> {

@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {getCustomRepository} from "typeorm";
 import UsersRepository from "../../../modules/users/typeorm/repositories/UsersRepository";
-import UsersRoleEnum from "../../../modules/users/enumerates/UsersRoleEnum";
+import UsersRoleEnum from "../../../modules/users/enumerations/UsersRoleEnum";
 import AppError from "../../errors/AppError";
 
 export default async function restrictedAccessForRoleOnlyAdmin(request: Request, response: Response, next: NextFunction)

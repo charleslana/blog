@@ -2,7 +2,7 @@ import {Router} from "express";
 import authenticatedUser from "../../../shared/http/middlewares/authenticatedUser";
 import {celebrate, Joi, Segments} from "celebrate";
 import RoleController from "../controllers/RoleController";
-import UsersRoleEnum from "../enumerates/UsersRoleEnum";
+import UsersRoleEnum from "../enumerations/UsersRoleEnum";
 import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleOnlyAdmin";
 
 const roleRouter = Router();
