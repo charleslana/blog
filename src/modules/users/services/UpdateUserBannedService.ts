@@ -1,12 +1,12 @@
-import User from "../typeorm/entities/User";
 import UpdateUserBannedInterface from "../interfaces/UpdateUserBannedInterface";
 import AppError from "../../../shared/errors/AppError";
 import {getCustomRepository} from "typeorm";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
+import AppSuccess from "../../../shared/success/AppSuccess";
 
 class UpdateUserBannedService {
 
-    public async execute({id, banned}: UpdateUserBannedInterface): Promise<User> {
+    public async execute({id, banned}: UpdateUserBannedInterface): Promise<Object> {
 
         const userRepository = getCustomRepository(UsersRepository);
         const user = await userRepository.findOne(id);
@@ -19,7 +19,7 @@ class UpdateUserBannedService {
 
         await userRepository.save(user);
 
-        return user;
+        return new AppSuccess("The user's banned status has been successfully changed.");
     }
 
 }

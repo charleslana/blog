@@ -5,6 +5,8 @@ import AppError from "../../../shared/errors/AppError";
 import {compare} from "bcryptjs";
 import {sign} from "jsonwebtoken";
 import authConfig from '../../../config/auth';
+import AppSuccess from "../../../shared/success/AppSuccess";
+import UsersBannedEnum from "../enumerates/UsersBannedEnum";
 
 class CreateSessionService {
 
@@ -23,15 +25,21 @@ class CreateSessionService {
             throw new AppError('Invalid credentials.', 401);
         }
 
+        if (user.banned == UsersBannedEnum.YES) {
+            throw new AppError('User is banned.', 401);
+        }
+
         const token = sign({}, authConfig.jwt.secret, {
             subject: user.id.toString(),
             expiresIn: authConfig.jwt.expiresIn
         });
 
+        const {statusCode, status, message} = new AppSuccess('User successfully authenticated', 201);
+
         return {
-            statusCode: 201,
-            status: 'success',
-            message: 'User successfully authenticated.',
+            statusCode,
+            status,
+            message,
             token: token,
         }
     }

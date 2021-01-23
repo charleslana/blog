@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import UpdateUserPasswordService from "../services/UpdateUserPasswordService";
+import AppSuccessInterface from "../../../shared/success/interfaces/AppSuccessInterface";
 
 class PasswordController {
 
@@ -12,7 +13,7 @@ class PasswordController {
             id: request.user.id,
             currentPassword,
             newPassword
-        });
+        }) as AppSuccessInterface;
 
         return response.json(user);
     }

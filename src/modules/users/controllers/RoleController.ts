@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import UpdateUserRoleService from "../services/UpdateUserRoleService";
+import AppSuccessInterface from "../../../shared/success/interfaces/AppSuccessInterface";
 
 class RoleController {
 
@@ -11,9 +12,9 @@ class RoleController {
         const user = await updateUserRole.execute({
             id,
             role
-        });
+        }) as AppSuccessInterface;
 
-        return response.json(user);
+        return response.status(user.statusCode).json(user);
     }
 }
 

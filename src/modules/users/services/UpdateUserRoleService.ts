@@ -1,12 +1,12 @@
-import User from "../typeorm/entities/User";
 import {getCustomRepository} from "typeorm";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import AppError from "../../../shared/errors/AppError";
 import UpdateUserRoleInterface from "../interfaces/UpdateUserRoleInterface";
+import AppSuccess from "../../../shared/success/AppSuccess";
 
 class UpdateUserRoleService {
 
-    public async execute({id, role}: UpdateUserRoleInterface): Promise<User> {
+    public async execute({id, role}: UpdateUserRoleInterface): Promise<Object> {
 
         const userRepository = getCustomRepository(UsersRepository);
         const user = await userRepository.findOne(id);
@@ -19,7 +19,7 @@ class UpdateUserRoleService {
 
         await userRepository.save(user);
 
-        return user;
+        return new AppSuccess("The user's role status has been successfully changed.");
 
     }
 }

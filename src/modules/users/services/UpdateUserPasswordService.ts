@@ -3,6 +3,7 @@ import UsersRepository from "../typeorm/repositories/UsersRepository";
 import AppError from "../../../shared/errors/AppError";
 import UpdateUserPasswordInterface from "../interfaces/UpdateUserPasswordInterface";
 import {compare, hash} from "bcryptjs";
+import AppSuccess from "../../../shared/success/AppSuccess";
 
 class UpdateUserPasswordService {
 
@@ -25,11 +26,7 @@ class UpdateUserPasswordService {
 
         await userRepository.save(user);
 
-        return {
-            statusCode: 200,
-            status: 'success',
-            message: 'Password changed successfully.'
-        }
+        return new AppSuccess('Password changed successfully.');
 
     }
 }

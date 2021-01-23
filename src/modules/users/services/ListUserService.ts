@@ -9,9 +9,7 @@ class ListUserService {
 
         const userRepository = getCustomRepository(UsersRepository);
 
-        const users = await userRepository.createQueryBuilder().paginate();
-
-        return users as PaginateUserInterface;
+        return await userRepository.createQueryBuilder().paginate() as PaginateUserInterface;
     }
 }
 

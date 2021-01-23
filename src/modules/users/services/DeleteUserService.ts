@@ -1,6 +1,7 @@
 import {getCustomRepository} from "typeorm";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import AppError from "../../../shared/errors/AppError";
+import AppSuccess from "../../../shared/success/AppSuccess";
 
 class DeleteUserService {
 
@@ -15,11 +16,7 @@ class DeleteUserService {
 
         await userRepository.remove(user);
 
-        return {
-            statusCode: 204,
-            status: 'success',
-            message: 'User deleted successfully.'
-        }
+        return new AppSuccess('User deleted successfully.', 204);
     }
 }
 

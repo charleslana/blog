@@ -5,6 +5,7 @@ import ShowUserService from "../services/ShowUserService";
 import {classToPlain} from "class-transformer";
 import UpdateUserService from "../services/UpdateUserService";
 import DeleteUserService from "../services/DeleteUserService";
+import AppSuccessInterface from "../../../shared/success/interfaces/AppSuccessInterface";
 
 class UsersController {
 
@@ -59,7 +60,7 @@ class UsersController {
         const {id} = request.params;
 
         const deleteUser = new DeleteUserService();
-        const user = await deleteUser.execute(parseInt(id));
+        const user = await deleteUser.execute(parseInt(id)) as AppSuccessInterface;
 
         return response.json(user);
     }

@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import UpdateUserBannedService from "../services/UpdateUserBannedService";
+import AppSuccessInterface from "../../../shared/success/interfaces/AppSuccessInterface";
 
 class BannedController {
 
@@ -11,9 +12,9 @@ class BannedController {
         const user = await updateUserBanned.execute({
             id,
             banned
-        });
+        }) as AppSuccessInterface;
 
-        return response.json(user);
+        return response.status(user.statusCode).json(user);
     }
 }
 

@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import CreateSessionService from "../services/CreateSessionService";
+import SessionSuccessInterface from "../interfaces/SessionSuccessInterface";
 
 class SessionsController {
 
@@ -11,9 +12,9 @@ class SessionsController {
         const user = await createSession.execute({
             email,
             password
-        });
+        }) as SessionSuccessInterface;
 
-        return response.status(201).json(user);
+        return response.status(user.statusCode).json(user);
     }
 }
 
