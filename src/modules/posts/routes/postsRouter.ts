@@ -17,6 +17,12 @@ postsRouter.post('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, cele
     }
 }, {abortEarly: false}), postController.create);
 
-postsRouter.get('/', authenticatedUser, postController.list);
+postsRouter.get('/', postController.list);
+
+postsRouter.get('/:id', celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.number().required()
+    }
+}), postController.show);
 
 export default postsRouter;

@@ -12,6 +12,15 @@ class PostsRepository extends Repository<Post> {
             .innerJoin('posts.user', 'user')
             .paginate() as PaginatePostInterface;
     }
+
+    public async findById(id: number): Promise<Post | undefined> {
+
+        return await this.createQueryBuilder('posts')
+            .select(['posts', 'user.name', 'user.avatar'])
+            .innerJoin('posts.user', 'user')
+            .where({id})
+            .getOne()
+    }
 }
 
 export default PostsRepository;

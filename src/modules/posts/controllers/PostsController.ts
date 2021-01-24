@@ -3,6 +3,7 @@ import CreatePostService from "../services/CreatePostService";
 import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInterface";
 import ListPostService from "../services/ListPostService";
 import {classToPlain} from "class-transformer";
+import ShowPostService from "../services/ShowPostService";
 
 class PostsController {
 
@@ -27,6 +28,16 @@ class PostsController {
         const posts = await listPosts.execute();
 
         return response.json(classToPlain(posts));
+    }
+
+    public async show(request: Request, response: Response): Promise<Response> {
+
+        const {id} = request.params;
+
+        const showPost = new ShowPostService();
+        const post = await showPost.execute(parseInt(id));
+
+        return response.json(classToPlain(post));
     }
 }
 
