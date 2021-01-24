@@ -1,13 +1,13 @@
 import {getCustomRepository} from 'typeorm';
-import User from "../typeorm/entities/User";
 import CreateUserInterface from "../interfaces/CreateUserInterface";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import AppError from "../../../shared/errors/AppError";
 import {hash} from "bcryptjs";
+import AppSuccess from "../../../shared/success/AppSuccess";
 
 class CreateUserService {
 
-    public async execute({name, email, password}: CreateUserInterface): Promise<User> {
+    public async execute({name, email, password}: CreateUserInterface): Promise<Object> {
 
         const userRepository = getCustomRepository(UsersRepository);
         const emailExists = await userRepository.findByEmail(email);
@@ -23,7 +23,9 @@ class CreateUserService {
             password: hashedPassword
         });
 
-        return await userRepository.save(user);
+        await userRepository.save(user);
+
+        return new AppSuccess('User successfully registered.', 201);
     }
 }
 

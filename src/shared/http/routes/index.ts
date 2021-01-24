@@ -6,6 +6,7 @@ import avatarRouter from "../../../modules/users/routes/avatarRouter";
 import roleRouter from "../../../modules/users/routes/roleRouter";
 import bannedRouter from "../../../modules/users/routes/bannedRouter";
 import userProfileRouter from "../../../modules/users/routes/userProfileRouter";
+import postsRouter from "../../../modules/posts/routes/postsRouter";
 
 const routes = Router();
 
@@ -22,5 +23,7 @@ routes.use('/users/avatar', avatarRouter);
 routes.use('/users/role', roleRouter);
 
 routes.use('/users/banned', bannedRouter);
+
+routes.use('/posts', postsRouter);
 
 export default routes;

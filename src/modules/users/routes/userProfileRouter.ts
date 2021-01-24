@@ -10,7 +10,7 @@ userProfileRouter.get('/', authenticatedUser, userProfileController.show);
 
 userProfileRouter.put('/', authenticatedUser, celebrate({
     [Segments.BODY]: {
-        name: Joi.string().pattern(new RegExp('^[a-zA-Z0-9 _]*$')).trim().min(3).max(50).required(),
+        name: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _]*$')).trim().min(3).max(50).required(),
         email: Joi.string().email().trim().max(50).required()
     }
 }, {abortEarly: false}), userProfileController.update);

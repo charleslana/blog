@@ -18,9 +18,9 @@ class UsersController {
             name,
             email,
             password
-        });
+        }) as AppSuccessInterface;
 
-        return response.status(201).json(classToPlain(user));
+        return response.status(user.statusCode).json(user);
     }
 
     public async list(request: Request, response: Response): Promise<Response> {

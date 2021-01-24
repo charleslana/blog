@@ -1,4 +1,3 @@
-import User from "../typeorm/entities/User";
 import {getCustomRepository} from "typeorm";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import PaginateUserInterface from "../interfaces/PaginateUserInterface";
