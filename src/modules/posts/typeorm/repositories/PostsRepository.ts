@@ -9,15 +9,16 @@ class PostsRepository extends Repository<Post> {
 
         return await this.createQueryBuilder('posts')
             .select(['posts', 'user.name', 'user.avatar'])
-            .innerJoin('posts.user', 'user')
+            .leftJoin('posts.user', 'user')
             .paginate() as PaginatePostInterface;
     }
 
     public async findById(id: number): Promise<Post | undefined> {
 
         return await this.createQueryBuilder('posts')
-            .select(['posts', 'user.name', 'user.avatar'])
-            .innerJoin('posts.user', 'user')
+            .select(['posts', 'user', 'comments_post'])
+            .leftJoin('posts.user', 'user')
+            .leftJoin('posts.comments_post', 'comments_post')
             .where({id})
             .getOne()
     }
