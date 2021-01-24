@@ -16,7 +16,7 @@ class PostsRepository extends Repository<Post> {
     public async findById(id: number): Promise<Post | undefined> {
 
         return await this.createQueryBuilder('posts')
-            .select(['posts', 'user', 'comments_post'])
+            .select(['posts', 'user.name', 'user.avatar', 'comments_post'])
             .leftJoin('posts.user', 'user')
             .leftJoin('posts.comments_post', 'comments_post')
             .where({id})
