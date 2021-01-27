@@ -5,6 +5,7 @@ import PostsCommentsEnum from "../enumerations/PostsCommentsEnum";
 import authenticatedUser from "../../../shared/http/middlewares/authenticatedUser";
 import restrictedAccessForRoleModOrAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleModOrAdmin";
 import PostsVisibilityEnum from "../enumerations/PostsVisibilityEnum";
+import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleOnlyAdmin";
 
 const postsRouter = Router();
 const postController = new PostsController();
@@ -36,5 +37,11 @@ postsRouter.put('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, celeb
         comments: Joi.string().valid(...Object.values(PostsCommentsEnum)).required()
     }
 }, {abortEarly: false}), postController.update);
+
+postsRouter.delete('/:id', authenticatedUser, restrictedAccessForRoleOnlyAdmin, celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.number().required()
+    }
+}), postController.delete);
 
 export default postsRouter;

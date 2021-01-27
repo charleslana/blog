@@ -5,6 +5,7 @@ import ListPostService from "../services/ListPostService";
 import {classToPlain} from "class-transformer";
 import ShowPostService from "../services/ShowPostService";
 import UpdatePostService from "../services/UpdatePostService";
+import DeletePostService from "../services/DeletePostService";
 
 class PostsController {
 
@@ -53,6 +54,16 @@ class PostsController {
             visibility,
             comments
         }) as AppSuccessInterface;
+
+        return response.json(post);
+    }
+
+    public async delete(request: Request, response: Response): Promise<Response> {
+
+        const {id} = request.params;
+
+        const deletePost = new DeletePostService();
+        const post = await deletePost.execute(parseInt(id)) as AppSuccessInterface;
 
         return response.json(post);
     }
