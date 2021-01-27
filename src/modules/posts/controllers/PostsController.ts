@@ -4,6 +4,7 @@ import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInt
 import ListPostService from "../services/ListPostService";
 import {classToPlain} from "class-transformer";
 import ShowPostService from "../services/ShowPostService";
+import UpdatePostService from "../services/UpdatePostService";
 
 class PostsController {
 
@@ -38,6 +39,22 @@ class PostsController {
         const post = await showPost.execute(parseInt(id));
 
         return response.json(classToPlain(post));
+    }
+
+    public async update(request: Request, response: Response): Promise<Response> {
+
+        const {id, title, description, visibility, comments} = request.body;
+        const updatePost = new UpdatePostService();
+
+        const post = await updatePost.execute({
+            id,
+            title,
+            description,
+            visibility,
+            comments
+        }) as AppSuccessInterface;
+
+        return response.json(post);
     }
 }
 
