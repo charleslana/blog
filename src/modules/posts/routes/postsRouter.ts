@@ -12,8 +12,8 @@ const postController = new PostsController();
 
 postsRouter.post('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
     [Segments.BODY]: {
-        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _]*$')).trim().min(1).max(255).required(),
-        description: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _]*$')).trim().min(1).max(10000)
+        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255).required(),
+        description: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(10000)
             .required(),
         comments: Joi.string().valid(...Object.values(PostsCommentsEnum)).required()
     }
@@ -30,8 +30,8 @@ postsRouter.get('/:id', celebrate({
 postsRouter.put('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
     [Segments.BODY]: {
         id: Joi.number().required(),
-        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _]*$')).trim().min(1).max(255).required(),
-        description: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _]*$')).trim().min(1).max(10000)
+        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255).required(),
+        description: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(10000)
             .required(),
         visibility: Joi.string().valid(...Object.values(PostsVisibilityEnum)).required(),
         comments: Joi.string().valid(...Object.values(PostsCommentsEnum)).required()
