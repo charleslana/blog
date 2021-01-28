@@ -6,6 +6,8 @@ import UsersBannedEnum from "../../users/enumerations/UsersBannedEnum";
 import AppError from "../../../shared/errors/AppError";
 import PostsRepository from "../../posts/typeorm/repositories/PostsRepository";
 import AppSuccess from "../../../shared/success/AppSuccess";
+import PostsVisibilityEnum from "../../posts/enumerations/PostsVisibilityEnum";
+import PostsCommentsEnum from "../../posts/enumerations/PostsCommentsEnum";
 
 class CreateCommentService {
 
@@ -24,6 +26,10 @@ class CreateCommentService {
 
         if (!post) {
             throw new AppError('Post not found.');
+        }
+
+        if (post.visibility == PostsVisibilityEnum.NO || post.comments == PostsCommentsEnum.NO) {
+            throw new AppError('Comments have been blocked on this post.');
         }
 
         const comment = commentRepository.create({
