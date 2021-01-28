@@ -2,6 +2,7 @@ import {Router} from "express";
 import CommentsController from "../controllers/CommentsController";
 import authenticatedUser from "../../../shared/http/middlewares/authenticatedUser";
 import {celebrate, Joi, Segments} from "celebrate";
+import restrictedAccessForRoleModOrAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleModOrAdmin";
 
 const commentsRouter = Router();
 const commentController = new CommentsController();
@@ -14,9 +15,9 @@ commentsRouter.post('/', authenticatedUser, celebrate({
     }
 }, {abortEarly: false}), commentController.create);
 
-commentsRouter.get('/', commentController.list);
+commentsRouter.get('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, commentController.list);
 
-commentsRouter.get('/:id', celebrate({
+commentsRouter.get('/:id', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
     [Segments.PARAMS]: {
         id: Joi.number().required()
     }
