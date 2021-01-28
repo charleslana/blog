@@ -14,4 +14,6 @@ commentsRouter.post('/', authenticatedUser, celebrate({
     }
 }, {abortEarly: false}), commentController.create);
 
+commentsRouter.get('/', commentController.list);
+
 export default commentsRouter;
