@@ -16,4 +16,10 @@ commentsRouter.post('/', authenticatedUser, celebrate({
 
 commentsRouter.get('/', commentController.list);
 
+commentsRouter.get('/:id', celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.number().required()
+    }
+}), commentController.show);
+
 export default commentsRouter;

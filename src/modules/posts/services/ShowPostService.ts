@@ -8,7 +8,6 @@ class ShowPostService {
     public async execute(id: number): Promise<Post | undefined> {
 
         const postRepository = getCustomRepository(PostsRepository);
-
         const post = await postRepository.findById(id);
 
         if (!post) {

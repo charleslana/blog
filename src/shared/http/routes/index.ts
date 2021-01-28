@@ -8,6 +8,7 @@ import bannedRouter from "../../../modules/users/routes/bannedRouter";
 import userProfileRouter from "../../../modules/users/routes/userProfileRouter";
 import postsRouter from "../../../modules/posts/routes/postsRouter";
 import commentsRouter from "../../../modules/comments/routes/commentsRouter";
+import commentsPostRouter from "../../../modules/comments/routes/commentsPostRouter";
 
 const routes = Router();
 
@@ -28,5 +29,7 @@ routes.use('/users/banned', bannedRouter);
 routes.use('/posts', postsRouter);
 
 routes.use('/comments', commentsRouter);
+
+routes.use('/comments/post', commentsPostRouter);
 
 export default routes;
