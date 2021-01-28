@@ -23,4 +23,18 @@ commentsRouter.get('/:id', authenticatedUser, restrictedAccessForRoleModOrAdmin,
     }
 }), commentController.show);
 
+commentsRouter.put('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
+    [Segments.BODY]: {
+        id: Joi.number().required(),
+        message: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(1000)
+            .required(),
+    }
+}, {abortEarly: false}), commentController.update);
+
+commentsRouter.delete('/:id', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.number().required()
+    }
+}), commentController.delete);
+
 export default commentsRouter;

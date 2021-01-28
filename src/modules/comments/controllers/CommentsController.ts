@@ -4,6 +4,8 @@ import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInt
 import {classToPlain} from "class-transformer";
 import ListCommentService from "../services/ListCommentService";
 import ShowCommentService from "../services/ShowCommentService";
+import UpdateCommentService from "../services/UpdateCommentService";
+import DeleteCommentService from "../services/DeleteCommentService";
 
 class CommentsController {
 
@@ -37,6 +39,29 @@ class CommentsController {
         const comment = await showComment.execute(parseInt(id));
 
         return response.json(classToPlain(comment));
+    }
+
+    public async update(request: Request, response: Response): Promise<Response> {
+
+        const {id, message} = request.body;
+        const updateComment = new UpdateCommentService();
+
+        const post = await updateComment.execute({
+            id,
+            message
+        }) as AppSuccessInterface;
+
+        return response.json(post);
+    }
+
+    public async delete(request: Request, response: Response): Promise<Response> {
+
+        const {id} = request.params;
+
+        const deleteComment = new DeleteCommentService();
+        const comment = await deleteComment.execute(parseInt(id)) as AppSuccessInterface;
+
+        return response.json(comment);
     }
 }
 

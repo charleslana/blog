@@ -1,12 +1,11 @@
 import {getCustomRepository} from "typeorm";
 import AppError from "../../../shared/errors/AppError";
 import AppSuccess from "../../../shared/success/AppSuccess";
-import UpdateCommentInterface from "../interfaces/UpdateCommentInterface";
 import CommentsRepository from "../typeorm/repositories/CommentsRepository";
 
-class UpdateCommentService {
+class DeleteCommentService {
 
-    public async execute({id, message}: UpdateCommentInterface): Promise<Object> {
+    public async execute(id: number): Promise<Object> {
 
         const commentRepository = getCustomRepository(CommentsRepository);
         const comment = await commentRepository.findOne(id);
@@ -15,12 +14,10 @@ class UpdateCommentService {
             throw new AppError('Comment not found.');
         }
 
-        comment.message = message;
+        await commentRepository.remove(comment);
 
-        await commentRepository.save(comment);
-
-        return new AppSuccess('Comment updated successfully.');
+        return new AppSuccess('Comment deleted successfully.', 204);
     }
 }
 
-export default UpdateCommentService;
+export default DeleteCommentService;
