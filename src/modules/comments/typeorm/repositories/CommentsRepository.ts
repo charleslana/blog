@@ -35,6 +35,15 @@ class CommentsRepository extends Repository<Comment>{
             })
             .paginate() as PaginateCommentInterface;
     }
+
+    public async existsById(id: number): Promise<Comment | undefined> {
+
+        return await this.createQueryBuilder('comments')
+            .select(['comments', 'user.id'])
+            .leftJoin('comments.user', 'user')
+            .where({id})
+            .getOne()
+    }
 }
 
 export default CommentsRepository;
