@@ -3,6 +3,7 @@ import ListCommentPostService from "../services/ListCommentPostService";
 import {classToPlain} from "class-transformer";
 import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInterface";
 import UpdateCommentPostService from "../services/UpdateCommentPostService";
+import DeleteCommentPostService from "../services/DeleteCommentPostService";
 
 class CommentsPostController {
 
@@ -28,6 +29,16 @@ class CommentsPostController {
         }) as AppSuccessInterface;
 
         return response.json(post);
+    }
+
+    public async delete(request: Request, response: Response): Promise<Response> {
+
+        const {id} = request.params;
+
+        const deleteComment = new DeleteCommentPostService();
+        const comment = await deleteComment.execute(parseInt(id), request.user.id) as AppSuccessInterface;
+
+        return response.json(comment);
     }
 }
 

@@ -20,4 +20,10 @@ commentsPostRouter.put('/', authenticatedUser, celebrate({
     }
 }, {abortEarly: false}), commentPostController.update);
 
+commentsPostRouter.delete('/:id', authenticatedUser, celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.number().required()
+    }
+}), commentPostController.delete);
+
 export default commentsPostRouter;
