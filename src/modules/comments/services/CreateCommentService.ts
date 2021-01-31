@@ -13,7 +13,6 @@ class CreateCommentService {
 
     public async execute({id, message, postId}: CreateCommentInterface): Promise<Object> {
 
-        const commentRepository = getCustomRepository(CommentsRepository);
         const userRepository = getCustomRepository(UsersRepository);
         const user = await userRepository.findOne(id);
 
@@ -31,6 +30,8 @@ class CreateCommentService {
         if (post.visibility == PostsVisibilityEnum.NO || post.comments == PostsCommentsEnum.NO) {
             throw new AppError('Comments have been blocked on this post.');
         }
+
+        const commentRepository = getCustomRepository(CommentsRepository);
 
         const comment = commentRepository.create({
             message,
