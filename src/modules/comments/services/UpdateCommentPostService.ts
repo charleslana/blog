@@ -9,13 +9,9 @@ class UpdateCommentPostService {
     public async execute({id, userId, message}: UpdateCommentPostInterface): Promise<Object> {
 
         const commentRepository = getCustomRepository(CommentsRepository);
-        const comment = await commentRepository.existsById(id);
+        const comment = await commentRepository.findByIdAndUserId(id, userId);
 
         if (!comment) {
-            throw new AppError('Comment not found.');
-        }
-
-        if (comment.user.id != userId) {
             throw new AppError('Comment not found.');
         }
 
