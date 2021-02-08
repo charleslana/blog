@@ -1,4 +1,6 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import UsersRoleEnum from "../../../modules/users/enumerations/UsersRoleEnum";
+import UsersBannedEnum from "../../../modules/users/enumerations/UsersBannedEnum";
 
 export class CreateUsers1610812822840 implements MigrationInterface {
 
@@ -34,12 +36,19 @@ export class CreateUsers1610812822840 implements MigrationInterface {
                 {
                     name: 'role',
                     type: 'enum',
-                    enum: ['USER', 'MOD', 'ADMIN']
+                    enum: [
+                        UsersRoleEnum.ADMIN,
+                        UsersRoleEnum.MOD,
+                        UsersRoleEnum.USER
+                    ]
                 },
                 {
                     name: 'banned',
                     type: 'enum',
-                    enum: ['YES', 'NO']
+                    enum: [
+                        UsersBannedEnum.NO,
+                        UsersBannedEnum.YES
+                    ]
                 },
                 {
                     name: 'created_at',

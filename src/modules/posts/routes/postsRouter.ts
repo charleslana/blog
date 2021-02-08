@@ -6,6 +6,7 @@ import authenticatedUser from "../../../shared/http/middlewares/authenticatedUse
 import restrictedAccessForRoleModOrAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleModOrAdmin";
 import PostsVisibilityEnum from "../enumerations/PostsVisibilityEnum";
 import restrictedAccessForRoleOnlyAdmin from "../../../shared/http/middlewares/restrictedAccessForRoleOnlyAdmin";
+import PostsCategoryEnum from "../enumerations/PostsCategoryEnum";
 
 const postsRouter = Router();
 const postController = new PostsController();
@@ -15,6 +16,7 @@ postsRouter.post('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, cele
         title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255).required(),
         description: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(10000)
             .required(),
+        category: Joi.string().valid(...Object.values(PostsCategoryEnum)).required(),
         comments: Joi.string().valid(...Object.values(PostsCommentsEnum)).required()
     }
 }, {abortEarly: false}), postController.create);

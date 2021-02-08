@@ -1,6 +1,6 @@
 enum PostsCommentsEnum {
-    YES = 'YES',
-    NO = 'NO'
+    NO = 'NO',
+    YES = 'YES'
 }
 
 export default PostsCommentsEnum;

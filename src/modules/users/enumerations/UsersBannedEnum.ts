@@ -1,6 +1,6 @@
 enum UsersBannedEnum {
-    YES = 'YES',
-    NO = 'NO'
+    NO = 'NO',
+    YES = 'YES'
 }
 
 export default UsersBannedEnum;

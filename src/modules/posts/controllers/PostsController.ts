@@ -11,13 +11,14 @@ class PostsController {
 
     public async create(request: Request, response: Response): Promise<Response> {
 
-        const {title, description, comments} = request.body;
+        const {title, description, category, comments} = request.body;
         const createPost = new CreatePostService();
 
         const post = await createPost.execute({
             id: request.user.id,
             title,
             description,
+            category,
             comments
         }) as AppSuccessInterface;
 

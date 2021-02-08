@@ -1,6 +1,6 @@
 enum PostsVisibilityEnum {
-    YES = 'YES',
-    NO = 'NO'
+    NO = 'NO',
+    YES = 'YES'
 }
 
 export default PostsVisibilityEnum;

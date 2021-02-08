@@ -16,7 +16,11 @@ class CreateCommentService {
         const userRepository = getCustomRepository(UsersRepository);
         const user = await userRepository.findOne(id);
 
-        if (user?.banned == UsersBannedEnum.YES) {
+        if (!user) {
+            throw new AppError('User not found.');
+        }
+
+        if (user.banned == UsersBannedEnum.YES) {
             throw new AppError("You are banned.");
         }
 

@@ -11,6 +11,7 @@ import PostsVisibilityEnum from "../../enumerations/PostsVisibilityEnum";
 import PostsCommentsEnum from "../../enumerations/PostsCommentsEnum";
 import User from "../../../users/typeorm/entities/User";
 import Comment from "../../../comments/typeorm/entities/Comment";
+import PostsCategoryEnum from "../../enumerations/PostsCategoryEnum";
 
 @Entity('posts')
 class Post {
@@ -23,6 +24,12 @@ class Post {
 
     @Column()
     description: string;
+
+    @Column({
+        type: "enum",
+        enum: PostsCategoryEnum
+    })
+    category: PostsCategoryEnum;
 
     @Column({
         type: "enum",
@@ -43,7 +50,9 @@ class Post {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, {
+        onDelete: "CASCADE"
+    })
     @JoinColumn({name: 'user_id'})
     user: User;
 

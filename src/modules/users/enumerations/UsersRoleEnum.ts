@@ -1,7 +1,7 @@
 enum UsersRoleEnum {
-    USER = 'USER',
+    ADMIN = 'ADMIN',
     MOD = 'MOD',
-    ADMIN = 'ADMIN'
+    USER = 'USER'
 }
 
 export default UsersRoleEnum;

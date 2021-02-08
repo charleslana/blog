@@ -11,7 +11,11 @@ export default async function restrictedAccessForRoleOnlyAdmin(request: Request,
 
     const user = await userRepository.findOne(request.user.id);
 
-    if (user?.role != UsersRoleEnum.ADMIN) {
+    if (!user) {
+        throw new AppError('User not found.');
+    }
+
+    if (user.role != UsersRoleEnum.ADMIN) {
         throw new AppError('Unauthorized access.', 401);
     }
 
