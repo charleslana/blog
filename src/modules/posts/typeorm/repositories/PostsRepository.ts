@@ -10,6 +10,7 @@ class PostsRepository extends Repository<Post> {
         return await this.createQueryBuilder('posts')
             .select(['posts', 'user.name', 'user.avatar'])
             .leftJoin('posts.user', 'user')
+            .orderBy('posts.created_at', 'DESC')
             .paginate() as PaginatePostInterface;
     }
 
