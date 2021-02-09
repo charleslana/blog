@@ -8,9 +8,13 @@ const commentPostController = new CommentsPostController();
 
 commentsPostRouter.get('/:postId', celebrate({
     [Segments.PARAMS]: {
-        postId: Joi.number().required()
+        postId: Joi.number().required(),
+    },
+    [Segments.QUERY]: {
+        page: Joi.number(),
+        per_page: Joi.number().equal(15)
     }
-}), commentPostController.list);
+}, {abortEarly: false}), commentPostController.list);
 
 commentsPostRouter.put('/', authenticatedUser, celebrate({
     [Segments.BODY]: {

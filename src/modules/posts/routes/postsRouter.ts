@@ -21,7 +21,12 @@ postsRouter.post('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, cele
     }
 }, {abortEarly: false}), postController.create);
 
-postsRouter.get('/', postController.list);
+postsRouter.get('/', celebrate({
+    [Segments.QUERY]: {
+        page: Joi.number(),
+        per_page: Joi.number().equal(15)
+    }
+}, {abortEarly: false}), postController.list);
 
 postsRouter.get('/:id', celebrate({
     [Segments.PARAMS]: {
