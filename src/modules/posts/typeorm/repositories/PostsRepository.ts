@@ -17,6 +17,15 @@ class PostsRepository extends Repository<Post> {
     public async findById(id: number): Promise<Post | undefined> {
 
         return await this.createQueryBuilder('posts')
+            .select(['posts', 'user.name', 'user.avatar'])
+            .leftJoin('posts.user', 'user')
+            .where({id})
+            .getOne()
+    }
+
+    public async findByIdWithComments(id: number): Promise<Post | undefined> {
+
+        return await this.createQueryBuilder('posts')
             .select(['posts', 'user.name', 'user.avatar', 'comments_post', 'user_comment.name',
                 'user_comment.avatar'
             ])
