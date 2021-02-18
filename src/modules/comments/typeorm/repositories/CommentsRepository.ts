@@ -27,6 +27,17 @@ class CommentsRepository extends Repository<Comment>{
     public async findByPostIdPerPage(postId: number): Promise<PaginateCommentInterface> {
 
         return await this.createQueryBuilder('comments')
+            .select(['comments', 'user.name', 'user.avatar'])
+            .leftJoin('comments.user', 'user')
+            .where({
+                'post': postId
+            })
+            .paginate() as PaginateCommentInterface;
+    }
+
+    public async findByPostIdWhitPostPerPage(postId: number): Promise<PaginateCommentInterface> {
+
+        return await this.createQueryBuilder('comments')
             .select(['comments', 'user.name', 'user.avatar', 'post'])
             .leftJoin('comments.user', 'user')
             .leftJoin('comments.post', 'post')
