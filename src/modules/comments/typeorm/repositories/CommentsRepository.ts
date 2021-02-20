@@ -32,6 +32,7 @@ class CommentsRepository extends Repository<Comment>{
             .where({
                 'post': postId
             })
+            .orderBy('comments.created_at', 'DESC')
             .paginate() as PaginateCommentInterface;
     }
 
