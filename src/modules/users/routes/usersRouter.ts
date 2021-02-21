@@ -12,7 +12,11 @@ usersRouter.post('/', celebrate({
     [Segments.BODY]: {
         name: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _]*$')).trim().min(3).max(50).required(),
         email: Joi.string().email().trim().max(50).required(),
-        password: Joi.string().min(6).max(50).required()
+        password: Joi.string().min(6).max(50).required(),
+        confirmPassword: Joi.string().valid(Joi.ref('password')).when('password', {
+            is: Joi.exist(),
+            then: Joi.required()
+        })
     }
 }, {abortEarly: false}), usersController.create);
 
