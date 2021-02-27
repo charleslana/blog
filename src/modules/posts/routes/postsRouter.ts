@@ -13,7 +13,8 @@ const postController = new PostsController();
 
 postsRouter.post('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
     [Segments.BODY]: {
-        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255).required(),
+        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255)
+            .required(),
         description: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(10000)
             .required(),
         category: Joi.string().valid(...Object.values(PostsCategoryEnum)).required(),
@@ -37,7 +38,8 @@ postsRouter.get('/:id', celebrate({
 postsRouter.put('/', authenticatedUser, restrictedAccessForRoleModOrAdmin, celebrate({
     [Segments.BODY]: {
         id: Joi.number().required(),
-        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255).required(),
+        title: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255)
+            .required(),
         description: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(10000)
             .required(),
         visibility: Joi.string().valid(...Object.values(PostsVisibilityEnum)).required(),
@@ -50,5 +52,12 @@ postsRouter.delete('/:id', authenticatedUser, restrictedAccessForRoleOnlyAdmin, 
         id: Joi.number().required()
     }
 }), postController.delete);
+
+postsRouter.post('/filter', celebrate({
+    [Segments.BODY]: {
+        text: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255)
+            .required().allow('')
+    }
+}), postController.filter);
 
 export default postsRouter;

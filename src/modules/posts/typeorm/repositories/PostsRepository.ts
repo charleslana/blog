@@ -35,6 +35,18 @@ class PostsRepository extends Repository<Post> {
             .where({id})
             .getOne()
     }
+
+    public async filterPerPage(text: string): Promise<PaginatePostInterface> {
+
+        return await this.createQueryBuilder('posts')
+            .select(['posts', 'user.name', 'user.avatar'])
+            .leftJoin('posts.user', 'user')
+            .where("posts.title like :text", {
+                text: `%${text}%`
+            })
+            .orderBy('posts.created_at', 'DESC')
+            .paginate() as PaginatePostInterface;
+    }
 }
 
 export default PostsRepository;

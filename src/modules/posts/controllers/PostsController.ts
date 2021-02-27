@@ -6,6 +6,7 @@ import {classToPlain} from "class-transformer";
 import ShowPostService from "../services/ShowPostService";
 import UpdatePostService from "../services/UpdatePostService";
 import DeletePostService from "../services/DeletePostService";
+import FilterPostService from "../services/FilterPostService";
 
 class PostsController {
 
@@ -67,6 +68,15 @@ class PostsController {
         const post = await deletePost.execute(parseInt(id)) as AppSuccessInterface;
 
         return response.json(post);
+    }
+
+    public async filter(request: Request, response: Response): Promise<Response> {
+
+        const {text} = request.body;
+        const filterPosts = new FilterPostService();
+        const posts = await filterPosts.execute(text);
+
+        return response.json(classToPlain(posts));
     }
 }
 
