@@ -54,10 +54,14 @@ postsRouter.delete('/:id', authenticatedUser, restrictedAccessForRoleOnlyAdmin, 
 }), postController.delete);
 
 postsRouter.post('/filter', celebrate({
+    [Segments.QUERY]: {
+        page: Joi.number(),
+        per_page: Joi.number().equal(15)
+    },
     [Segments.BODY]: {
         text: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ú0-9 _.]*$')).trim().min(1).max(255)
             .required().allow('')
     }
-}), postController.filter);
+}, {abortEarly: false}), postController.filter);
 
 export default postsRouter;
