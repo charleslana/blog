@@ -41,6 +41,11 @@ class CreateSessionService {
             status,
             message,
             token: token,
+            user: {
+                name: user.name,
+                avatar: user.getAvatarUrl(),
+                role: user.role
+            }
         }
     }
 }
