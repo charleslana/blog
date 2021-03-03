@@ -1,0 +1,22 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "root",
+  "database": "blog",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+    "src/modules/**/typeorm/entities/*.ts"
+  ],
+  "migrations": [
+    "src/shared/typeorm/migrations/*.ts"
+  ],
+  "subscribers": [
+    "src/shared/typeorm/subscribers/**/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "src/shared/typeorm/migrations"
+  }
+}
