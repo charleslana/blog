@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 import ShowUserService from "../services/ShowUserService";
 import {classToPlain} from "class-transformer";
 import UpdateUserService from "../services/UpdateUserService";
+import AppSuccessInterface from "../../../shared/success/interface/AppSuccessInterface";
 
 class UserProfileController {
 
@@ -22,9 +23,9 @@ class UserProfileController {
             id: request.user.id,
             name,
             email
-        });
+        }) as AppSuccessInterface;
 
-        return response.json(classToPlain(user));
+        return response.status(user.statusCode).json(user);
     }
 }
 

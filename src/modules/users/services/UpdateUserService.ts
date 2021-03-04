@@ -1,12 +1,12 @@
-import User from "../typeorm/entities/User";
 import {getCustomRepository} from "typeorm";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import AppError from "../../../shared/errors/AppError";
 import UpdateUserInterface from "../interfaces/UpdateUserInterface";
+import AppSuccess from "../../../shared/success/AppSuccess";
 
 class UpdateUserService {
 
-    public async execute({id, name, email}: UpdateUserInterface): Promise<User> {
+    public async execute({id, name, email}: UpdateUserInterface): Promise<Object> {
 
         const userRepository = getCustomRepository(UsersRepository);
         const user = await userRepository.findOne(id);
@@ -26,7 +26,7 @@ class UpdateUserService {
 
         await userRepository.save(user);
 
-        return user;
+        return new AppSuccess("Change profile successfully.");
 
     }
 }
