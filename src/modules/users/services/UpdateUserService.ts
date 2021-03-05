@@ -26,7 +26,7 @@ class UpdateUserService {
 
         await userRepository.save(user);
 
-        return new AppSuccess("Change profile successfully.");
+        return new AppSuccess("Changed profile successfully.");
 
     }
 }
